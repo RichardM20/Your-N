@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'src/views/splash/splash_view.dart';
+import 'package:get/get.dart';
+import 'package:note_app/src/views/dashboard/dashboard_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +11,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Notes :3',
-      home: SplashView(),
+    return GetMaterialApp(
+      title: 'Notes app',
+      home: DashbaordView(),
     );
   }
 }
