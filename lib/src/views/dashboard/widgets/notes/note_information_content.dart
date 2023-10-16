@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/app/theme/theme_app.dart';
 import 'package:note_app/src/app/utils/font_app.dart';
-import 'package:note_app/src/controllers/node_controller.dart';
+import 'package:note_app/src/controllers/dashboard_controller.dart';
 
 import 'menu_actions_content.dart';
 
@@ -24,18 +25,35 @@ class NoteInformationContent extends StatelessWidget {
                 text: "${_controller.notesModel[index].title}\n\n",
                 style: TextStyle(
                   fontFamily: FontApp.mediumStyle,
+                  color: Theme.of(context).primaryColor,
                 ),
               ),
               TextSpan(
                 text: _controller.notesModel[index].content,
                 style: TextStyle(
                   fontFamily: FontApp.regularStyle,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               )
             ],
           ),
         ),
-        NoteListMenuActionsContent()
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            NoteListMenuActionsContent(
+              noteIndex: index,
+            ),
+            Text(
+              _controller.notesModel[index].date ?? "",
+              style: TextStyle(
+                fontFamily: FontApp.regularStyle,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+            )
+          ],
+        )
       ],
     );
   }

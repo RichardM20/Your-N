@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note_app/src/app/utils/font_app.dart';
-import 'package:note_app/src/controllers/node_controller.dart';
+import 'package:note_app/src/controllers/dashboard_controller.dart';
 import 'package:note_app/src/views/widgets/loading_hover.dart';
 
 import 'widgets/appbar/profile_photo_content.dart';
@@ -15,16 +15,11 @@ class DashbaordView extends StatelessWidget {
   final _controller = DashboardController.to;
   @override
   Widget build(BuildContext context) {
-    final borderStyle = OutlineInputBorder(
-      borderSide: BorderSide.none,
-      borderRadius: BorderRadius.circular(100),
-    );
     return Scaffold(
-      backgroundColor: const Color(0xFFf1f1f1),
       appBar: AppBar(
-        leadingWidth: 500,
+        leadingWidth: 430,
         toolbarHeight: 90,
-        leading: TextFormSearchContent(borderStyle: borderStyle),
+        leading: TextFormSearchContent( ),
         actions: const [
           ProfilePhotoContent(),
         ],
@@ -48,8 +43,3 @@ class DashbaordView extends StatelessWidget {
     );
   }
 }
-
-// ignore: must_be_immutable
-
-// ignore: must_be_immutable
-

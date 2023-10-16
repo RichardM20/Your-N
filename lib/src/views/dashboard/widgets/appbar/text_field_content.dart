@@ -4,18 +4,20 @@ import 'package:get/get.dart';
 class TextFormSearchContent extends StatelessWidget {
   const TextFormSearchContent({
     super.key,
-    required this.borderStyle,
   });
-
-  final OutlineInputBorder borderStyle;
 
   @override
   Widget build(BuildContext context) {
+    final borderStyle = OutlineInputBorder(
+      borderSide: BorderSide.none,
+      borderRadius: BorderRadius.circular(100),
+    );
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(left: 30),
         child: TextFormField(
           textInputAction: TextInputAction.search,
+          cursorColor: Theme.of(context).appBarTheme.backgroundColor,
           decoration: InputDecoration(
             fillColor: Colors.white,
             border: borderStyle,
@@ -24,7 +26,11 @@ class TextFormSearchContent extends StatelessWidget {
             hintText: 'search'.tr,
             focusedBorder: borderStyle,
             filled: true,
-            prefixIcon: const Icon(Icons.search),
+            prefixIcon: Icon(
+              Icons.search,
+              color: Theme.of(context).appBarTheme.backgroundColor,
+            ),
+            focusColor: Theme.of(context).appBarTheme.backgroundColor,
             contentPadding: const EdgeInsets.symmetric(horizontal: 50),
           ),
         ),
