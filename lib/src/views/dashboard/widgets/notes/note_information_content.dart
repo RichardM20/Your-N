@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:note_app/src/app/utils/font_app.dart';
 import 'package:note_app/src/controllers/dashboard_controller.dart';
@@ -22,19 +23,27 @@ class NoteInformationContent extends StatelessWidget {
           TextSpan(
             children: [
               TextSpan(
-                text: "${_controller.notesModel[index].title}\n\n",
+                text: "${_controller.notesModel[index].title}\n",
                 style: TextStyle(
                   fontFamily: FontApp.mediumStyle,
                   color: Theme.of(context).primaryColor,
                 ),
               ),
-              TextSpan(
-                text: _controller.notesModel[index].content,
-                style: TextStyle(
-                  fontFamily: FontApp.regularStyle,
-                  color: Theme.of(context).colorScheme.secondary,
+              WidgetSpan(
+                  child: SizedBox(
+                width: Get.width * 0.1,
+                child: Text(
+                  _controller.notesModel[index].preview
+                      .toString()
+                      .trim()
+                      .replaceAll("\n", ''),
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontFamily: FontApp.regularStyle,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
                 ),
-              )
+              ))
             ],
           ),
         ),

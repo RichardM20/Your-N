@@ -4,24 +4,23 @@
 
 import 'dart:convert';
 
-NoteDataModel noteDataModelFromJson(String str) => NoteDataModel.fromJson(json.decode(str));
+NoteDataModel noteDataModelFromJson(String str) =>
+    NoteDataModel.fromJson(json.decode(str));
 
 String noteDataModelToJson(NoteDataModel data) => json.encode(data.toJson());
 
 class NoteDataModel {
   String? title;
   String? content;
+  String? preview;
   String? date;
 
-  NoteDataModel({
-    this.title,
-    this.content,
-    this.date,
-  });
+  NoteDataModel({this.title, this.content, this.date, this.preview});
 
   factory NoteDataModel.fromJson(Map<String, dynamic> json) => NoteDataModel(
         title: json["title"],
         content: json["content"],
+        preview: json["preview"],
         date: json["date"],
       );
 
@@ -29,5 +28,6 @@ class NoteDataModel {
         "title": title,
         "content": content,
         "date": date,
+        "preview": preview,
       };
 }

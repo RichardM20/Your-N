@@ -41,17 +41,30 @@ class NotesListContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: List.generate(
             _controller.notesModel.length,
-            (index) => MouseRegion(
-              onEnter: (event) => onItemHover.value = index,
-              onExit: (event) => onItemHover.value = -999,
-              cursor: SystemMouseCursors.click,
+            (index) => InkWell(
+              onTap: () {
+                _controller.editionState.value = 'editing';
+
+                _controller.setEditNote(_controller.notesModel[index], index);
+              },
+              onHover: (isHover) {
+                if (isHover == true) {
+                  onItemHover.value = index;
+                } else {
+                  onItemHover.value = -999;
+                }
+              },
+              mouseCursor: SystemMouseCursors.click,
               child: Obx(
                 () => AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   curve: Curves.easeIn,
-                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                   decoration: BoxDecoration(
-                    color: onItemHover.value == index ? Colors.white : Theme.of(context).colorScheme.background,
+                    color: onItemHover.value == index
+                        ? Colors.white
+                        : Theme.of(context).colorScheme.background,
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: onItemHover.value == index
                         ? [

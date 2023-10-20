@@ -8,7 +8,7 @@ import 'package:note_app/src/views/dashboard/dashboard_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initializeDateFormatting('es', null);
+  await initializeDateFormatting('en', null);
   final prefs = Preferences();
   await prefs.initPrefs();
   Get.put(DashboardController());

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_quill/flutter_quill.dart';
@@ -25,8 +27,20 @@ class SaveNoteButtonContent extends StatelessWidget {
             (states) => Theme.of(context).primaryColor,
           )),
       onPressed: () {
-        var text = controller.document.toPlainText();
-        DashboardController.to.addNote(NoteDataModel(title: 'Example 1', content: text, date: dateFormat(DateTime.now())));
+        String preview = controller.document.toPlainText();
+        String content = jsonEncode(controller.document.toDelta().toJson());
+        if (DashboardController.to.editionState.value == "editing") {
+          //
+        } else {
+          DashboardController.to.addNote(
+            NoteDataModel(
+              title: controller.document.root.children.first.toPlainText(),
+              content: content,
+              preview: preview,
+              date: dateFormat(DateTime.now()),
+            ),
+          );
+        }
       },
       child: Padding(
         padding: const EdgeInsets.all(10),

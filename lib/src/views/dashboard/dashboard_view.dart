@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:note_app/src/controllers/dashboard_controller.dart';
+import 'package:note_app/src/views/dashboard/widgets/edition/note_edition_view_content.dart';
 import 'package:note_app/src/views/widgets/loading_hover.dart';
 
 import 'widgets/appbar/profile_photo_content.dart';
@@ -28,7 +29,8 @@ class DashbaordView extends StatelessWidget {
         () => _controller.isLoading.value
             ? const HoverLoading()
             : Padding(
-                padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 40),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 30, horizontal: 40),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +42,7 @@ class DashbaordView extends StatelessWidget {
                     const SizedBox(width: 10),
                     Expanded(
                       flex: 2,
-                      child: NoteEditionContent(),
+                      child: NoteEditionViewContent(),
                     ),
                   ],
                 ),
