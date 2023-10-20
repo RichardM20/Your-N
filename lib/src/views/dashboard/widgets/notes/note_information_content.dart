@@ -33,10 +33,7 @@ class NoteInformationContent extends StatelessWidget {
                   child: SizedBox(
                 width: Get.width * 0.1,
                 child: Text(
-                  _controller.notesModel[index].preview
-                      .toString()
-                      .trim()
-                      .replaceAll("\n", ''),
+                  _controller.notesModel[index].preview.toString().trim().replaceAll("\n", ''),
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontFamily: FontApp.regularStyle,

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:get/get.dart';
 import 'package:note_app/src/app/utils/date_format.dart';
 import 'package:note_app/src/app/utils/font_app.dart';
 import 'package:note_app/src/controllers/dashboard_controller.dart';
@@ -30,7 +31,15 @@ class SaveNoteButtonContent extends StatelessWidget {
         String preview = controller.document.toPlainText();
         String content = jsonEncode(controller.document.toDelta().toJson());
         if (DashboardController.to.editionState.value == "editing") {
-          //
+          DashboardController.to.updateNote(
+            NoteDataModel(
+              title: controller.document.root.children.first.toPlainText(),
+              content: content,
+              preview: preview,
+              date: dateFormat(DateTime.now()),
+            ),
+          );
+          Get.snackbar("Update", "Note has been updated");
         } else {
           DashboardController.to.addNote(
             NoteDataModel(
@@ -40,6 +49,7 @@ class SaveNoteButtonContent extends StatelessWidget {
               date: dateFormat(DateTime.now()),
             ),
           );
+          Get.snackbar("New", "Note has been added");
         }
       },
       child: Padding(

@@ -19,6 +19,7 @@ class DashboardController extends GetxController {
   RxDouble fontSizeSelected = 12.0.obs;
 
   getData() async {
+    isLoading.value = true;
     await Future.delayed(const Duration(milliseconds: 300));
     notesModel.clear();
     List data = jsonDecode(_prefs.getNotes);
@@ -54,11 +55,12 @@ class DashboardController extends GetxController {
     getData();
   }
 
-  updateNote(int index, NoteDataModel model) {
-    List data = jsonDecode(_prefs.getFavorite);
-    data.removeAt(index);
+  updateNote(NoteDataModel model) {
+    List data = jsonDecode(_prefs.getNotes);
+    data.removeAt(noteEditIndex.value);
     data.add(model);
     _prefs.addNote = jsonEncode(data);
+    
     getData();
   }
 

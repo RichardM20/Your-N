@@ -14,10 +14,7 @@ class WaitContent extends StatelessWidget {
         RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
-            children:
-                "Welcome\nDon't forget that the first line of your notes will be highlighted as the title.\nEnjoy YNA"
-                    .split('\n')
-                    .map((line) {
+            children: "Hello\nDon't forget that the first line of your notes will be highlighted as the title.\nEnjoy YNA".split('\n').map((line) {
               if (line == "Welcome") {
                 return TextSpan(
                   text: "$line\n\n",

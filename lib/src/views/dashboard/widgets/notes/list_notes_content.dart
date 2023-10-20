@@ -35,16 +35,20 @@ class NotesListContent extends StatelessWidget {
     return Expanded(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: List.generate(
             _controller.notesModel.length,
             (index) => InkWell(
+              hoverColor: Colors.transparent,
+              splashColor: Colors.transparent,
+              overlayColor: MaterialStateProperty.resolveWith(
+                (states) => Colors.transparent,
+              ),
               onTap: () {
                 _controller.editionState.value = 'editing';
-
                 _controller.setEditNote(_controller.notesModel[index], index);
               },
               onHover: (isHover) {
@@ -59,12 +63,9 @@ class NotesListContent extends StatelessWidget {
                 () => AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   curve: Curves.easeIn,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                   decoration: BoxDecoration(
-                    color: onItemHover.value == index
-                        ? Colors.white
-                        : Theme.of(context).colorScheme.background,
+                    color: onItemHover.value == index ? Colors.white : Theme.of(context).colorScheme.background,
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: onItemHover.value == index
                         ? [
