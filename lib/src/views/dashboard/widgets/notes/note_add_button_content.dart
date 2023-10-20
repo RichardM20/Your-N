@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note_app/src/app/utils/font_app.dart';
-import 'package:note_app/src/controllers/dashboard_controller.dart';
 
 class AddNoteButtonContent extends StatelessWidget {
   const AddNoteButtonContent({
@@ -21,7 +20,7 @@ class AddNoteButtonContent extends StatelessWidget {
       color: Theme.of(context).primaryColor,
       onPressed: () {},
       child: Text(
-        "add_note".tr,
+        "New note".tr,
         style: TextStyle(
           fontFamily: FontApp.mediumStyle,
           color: Colors.white,

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:note_app/src/app/theme/theme_app.dart';
 import 'package:note_app/src/app/utils/preferences.dart';
+import 'package:note_app/src/controllers/dashboard_controller.dart';
 import 'package:note_app/src/views/dashboard/dashboard_view.dart';
 
 void main() async {
@@ -10,7 +11,7 @@ void main() async {
   await initializeDateFormatting('es', null);
   final prefs = Preferences();
   await prefs.initPrefs();
-
+  Get.put(DashboardController());
   //
   runApp(const MyApp());
 }
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: ThemeApp.lightTheme,
       darkTheme: ThemeApp.darkTheme,

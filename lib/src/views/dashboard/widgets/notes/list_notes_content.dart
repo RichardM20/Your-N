@@ -12,15 +12,12 @@ class NoteListDataContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 1,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const AddNoteButtonContent(),
-          NotesListContent(),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const AddNoteButtonContent(),
+        NotesListContent(),
+      ],
     );
   }
 }
@@ -70,7 +67,7 @@ class NotesListContent extends StatelessWidget {
                         : [],
                   ),
                   width: Get.width,
-                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  margin: const EdgeInsets.symmetric(vertical: 4),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

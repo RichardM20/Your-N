@@ -16,6 +16,7 @@ dependencies:
   get: ^4.6.6
   shared_preferences: ^2.2.2
   intl: ^0.18.1
+  flutter_quill: ^7.4.15
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +54,45 @@ flutter:
     - family: Inter-Regular
       fonts:
         - asset: assets/fonts/Inter-Regular.ttf
+
+    - family: OpenSans-Bold
+      fonts:
+        - asset: assets/fonts/OpenSans-Bold.ttf
+    - family: OpenSans-BoldItalic
+      fonts:
+        - asset: assets/fonts/OpenSans-BoldItalic.ttf
+    - family: OpenSans-Italic
+      fonts:
+        - asset: assets/fonts/OpenSans-Italic.ttf
+    - family: OpenSans-Regular
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+
+    - family: Poppins-Bold
+      fonts:
+        - asset: assets/fonts/Poppins-Bold.ttf
+    - family: Poppins-BoldItalic
+      fonts:
+        - asset: assets/fonts/Poppins-BoldItalic.ttf
+    - family: Poppins-Italic
+      fonts:
+        - asset: assets/fonts/Poppins-Italic.ttf
+    - family: Poppins-Regular
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+
+    - family: Roboto-Bold
+      fonts:
+        - asset: assets/fonts/Roboto-Bold.ttf
+    - family: Roboto-BoldItalic
+      fonts:
+        - asset: assets/fonts/Roboto-BoldItalic.ttf
+    - family: Roboto-Italic
+      fonts:
+        - asset: assets/fonts/Roboto-Italic.ttf
+    - family: Roboto-Regular
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
 
   #
   # For details regarding fonts from package dependencies,

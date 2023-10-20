@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:note_app/src/app/utils/font_app.dart';
 import 'package:note_app/src/controllers/dashboard_controller.dart';
 
+// ignore: must_be_immutable
 class NoteListMenuActionsContent extends StatelessWidget {
   NoteListMenuActionsContent({
     super.key,
@@ -21,7 +21,7 @@ class NoteListMenuActionsContent extends StatelessWidget {
     }
   ];
   final int noteIndex;
-  @override
+
   final _controller = DashboardController.to;
   @override
   Widget build(BuildContext context) {

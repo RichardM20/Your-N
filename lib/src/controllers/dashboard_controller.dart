@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:note_app/src/app/utils/date_format.dart';
+
 import 'package:note_app/src/app/utils/preferences.dart';
 import 'package:note_app/src/models/note_model.dart';
 
@@ -10,17 +10,13 @@ class DashboardController extends GetxController {
   final notesModel = RxList<NoteDataModel>();
   final isLoading = true.obs;
   final _prefs = Preferences();
+  RxBool isBold = false.obs;
+  RxBool isItalic = false.obs;
+  final familySelected = 'Inter'.obs;
+
+  RxDouble fontSizeSelected = 12.0.obs;
 
   getData() async {
-    addNote(
-      NoteDataModel(
-        content: 'Example ',
-        date: dateFormat(
-          DateTime.now().toLocal(),
-        ),
-        title: 'Example Title',
-      ),
-    );
     await Future.delayed(const Duration(milliseconds: 300));
     notesModel.clear();
     List data = jsonDecode(_prefs.getNotes);
