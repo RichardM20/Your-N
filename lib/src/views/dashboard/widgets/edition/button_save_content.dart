@@ -6,6 +6,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:get/get.dart';
 import 'package:note_app/src/app/utils/date_format.dart';
 import 'package:note_app/src/app/utils/font_app.dart';
+import 'package:note_app/src/app/utils/snackbar.dart';
 import 'package:note_app/src/controllers/dashboard_controller.dart';
 import 'package:note_app/src/models/note_model.dart';
 
@@ -39,7 +40,10 @@ class SaveNoteButtonContent extends StatelessWidget {
               date: dateFormat(DateTime.now()),
             ),
           );
-          Get.snackbar("Update", "Note has been updated");
+          if (Get.width < 600) {
+            Get.back();
+          }
+          SnackbarService.show(title: 'Success', message: 'Saved note');
         } else {
           DashboardController.to.addNote(
             NoteDataModel(
@@ -49,8 +53,13 @@ class SaveNoteButtonContent extends StatelessWidget {
               date: dateFormat(DateTime.now()),
             ),
           );
-          Get.snackbar("New", "Note has been added");
+          if (Get.width < 600) {
+            Get.back();
+          }
+          SnackbarService.show(title: 'Success', message: 'Updated note');
         }
+
+        DashboardController.to.editionState.value = 'waiting';
       },
       child: Padding(
         padding: const EdgeInsets.all(10),

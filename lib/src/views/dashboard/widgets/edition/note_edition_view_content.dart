@@ -15,22 +15,29 @@ class NoteEditionViewContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => dashboardController.editionState.value == 'empty'
-          ? const EmptyNotesContent()
-          : dashboardController.editionState.value == 'waiting'
-              ? const WaitContent()
-              : dashboardController.editionState.value == 'editing'
-                  ? NoteEditionContent(
-                      editing: true,
-                      document: Document.fromJson(
-                        jsonDecode(
-                          dashboardController.noteEdit.value.content.toString(),
-                        ),
-                      ),
-                    )
-                  : const NoteEditionContent(
-                      editing: false,
-                    ),
+      () => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          if (dashboardController.editionState.value == 'empty')
+            const EmptyNotesContent(),
+          if (dashboardController.editionState.value == 'waiting')
+            const WaitContent(),
+          if (dashboardController.editionState.value == 'editing')
+            NoteEditionContent(
+              editing: true,
+              document: Document.fromJson(
+                jsonDecode(
+                  dashboardController.noteEdit.value.content.toString(),
+                ),
+              ),
+            ),
+          if (dashboardController.editionState.value == "new")
+            const NoteEditionContent(
+              editing: false,
+            ),
+        ],
+      ),
     );
   }
 }

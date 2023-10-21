@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:note_app/src/controllers/dashboard_controller.dart';
+import 'package:note_app/src/views/dashboard/widgets/edition/notes_edition_content.dart';
 
 import 'note_add_button_content.dart';
 import 'note_information_content.dart';
@@ -50,6 +54,19 @@ class NotesListContent extends StatelessWidget {
               onTap: () {
                 _controller.editionState.value = 'editing';
                 _controller.setEditNote(_controller.notesModel[index], index);
+                if (Get.width < 600) {
+                  showBottomSheet(
+                    context: context,
+                    builder: (context) => NoteEditionContent(
+                      document: Document.fromJson(
+                        jsonDecode(
+                          _controller.noteEdit.value.content.toString(),
+                        ),
+                      ),
+                      editing: true,
+                    ),
+                  );
+                }
               },
               onHover: (isHover) {
                 if (isHover == true) {
@@ -63,9 +80,12 @@ class NotesListContent extends StatelessWidget {
                 () => AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   curve: Curves.easeIn,
-                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                   decoration: BoxDecoration(
-                    color: onItemHover.value == index ? Colors.white : Theme.of(context).colorScheme.background,
+                    color: onItemHover.value == index
+                        ? Colors.white
+                        : Theme.of(context).colorScheme.background,
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: onItemHover.value == index
                         ? [

@@ -9,10 +9,10 @@ class HoverLoading extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       color: Colors.white.withOpacity(0.8),
-      child: const Center(
+      child: Center(
         child: CircularProgressIndicator(
-          color: Colors.blueAccent,
-          backgroundColor: Colors.white,
+          color: Theme.of(context).primaryColor,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
           strokeWidth: 2.0,
         ),
       ),

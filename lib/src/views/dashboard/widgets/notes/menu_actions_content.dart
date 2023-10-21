@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/src/app/utils/font_app.dart';
+import 'package:note_app/src/app/utils/snackbar.dart';
 import 'package:note_app/src/controllers/dashboard_controller.dart';
 
 // ignore: must_be_immutable
@@ -40,7 +41,10 @@ class NoteListMenuActionsContent extends StatelessWidget {
       itemBuilder: (context) => List.generate(
         actions.length,
         (index) => PopupMenuItem(
-          onTap: () => _controller.deleteNote(noteIndex),
+          onTap: () {
+            _controller.deleteNote(noteIndex);
+            SnackbarService.show(title: 'Success', message: 'Deleted note');
+          },
           child: Row(
             children: [
               Icon(actions[index]['icon'], color: actions[index]['color']),

@@ -43,7 +43,6 @@ class DashboardController extends GetxController {
     List data = jsonDecode(_prefs.getNotes);
     data.removeAt(index);
     _prefs.addNote = jsonEncode(data);
-    isLoading.value = true;
 
     getData();
   }
@@ -60,7 +59,7 @@ class DashboardController extends GetxController {
     data.removeAt(noteEditIndex.value);
     data.add(model);
     _prefs.addNote = jsonEncode(data);
-    
+
     getData();
   }
 

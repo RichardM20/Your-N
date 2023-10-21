@@ -1,4 +1,4 @@
-package com.example.note_web_app
+package com.yna.app
 
 import io.flutter.embedding.android.FlutterActivity
 

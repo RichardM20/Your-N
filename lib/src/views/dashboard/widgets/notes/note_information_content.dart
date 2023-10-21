@@ -19,46 +19,47 @@ class NoteInformationContent extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text.rich(
-          TextSpan(
-            children: [
-              TextSpan(
-                text: "${_controller.notesModel[index].title}\n",
-                style: TextStyle(
-                  fontFamily: FontApp.mediumStyle,
-                  color: Theme.of(context).primaryColor,
+        Expanded(
+          child: Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: "${_controller.notesModel[index].title}\n",
+                  style: TextStyle(
+                    fontFamily: FontApp.mediumStyle,
+                    color: Theme.of(context).primaryColor,
+                    height: 0.8,
+                    fontSize: 18,
+                  ),
                 ),
-              ),
-              WidgetSpan(
-                  child: SizedBox(
-                width: Get.width * 0.1,
-                child: Text(
-                  _controller.notesModel[index].preview.toString().trim().replaceAll("\n", ''),
-                  overflow: TextOverflow.ellipsis,
+                WidgetSpan(
+                    child: SizedBox(
+                  child: Text(
+                    _controller.notesModel[index].preview
+                        .toString()
+                        .trim()
+                        .replaceAll("\n", ''),
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontFamily: FontApp.regularStyle,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                )),
+                TextSpan(
+                  text: '\n\n${_controller.notesModel[index].date}',
                   style: TextStyle(
                     fontFamily: FontApp.regularStyle,
                     color: Theme.of(context).colorScheme.secondary,
+                    fontSize: 12,
                   ),
                 ),
-              ))
-            ],
+              ],
+            ),
           ),
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            NoteListMenuActionsContent(
-              noteIndex: index,
-            ),
-            Text(
-              _controller.notesModel[index].date ?? "",
-              style: TextStyle(
-                fontFamily: FontApp.regularStyle,
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-            )
-          ],
+        NoteListMenuActionsContent(
+          noteIndex: index,
         )
       ],
     );

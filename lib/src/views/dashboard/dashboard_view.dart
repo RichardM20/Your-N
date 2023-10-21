@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:note_app/src/controllers/dashboard_controller.dart';
+import 'package:note_app/src/views/dashboard/widgets/devices/ipds_dektop_view.dart';
+import 'package:note_app/src/views/dashboard/widgets/devices/mobile_view.dart';
 import 'package:note_app/src/views/dashboard/widgets/edition/note_edition_view_content.dart';
 import 'package:note_app/src/views/widgets/loading_hover.dart';
 
@@ -18,35 +20,28 @@ class DashbaordView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leadingWidth: 430,
         toolbarHeight: 90,
-        leading: const TextFormSearchContent(),
+        centerTitle: false,
+        title: const TextFormSearchContent(),
         actions: const [
           ProfilePhotoContent(),
         ],
       ),
-      body: Obx(
-        () => _controller.isLoading.value
-            ? const HoverLoading()
-            : Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 30, horizontal: 40),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Expanded(
-                      flex: 1,
-                      child: NoteListDataContent(),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      flex: 2,
-                      child: NoteEditionViewContent(),
-                    ),
-                  ],
+      body: Container(
+        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 40),
+        child: Obx(
+          () => _controller.isLoading.value
+              ? const HoverLoading()
+              : LayoutBuilder(
+                  builder: (context, constraints) {
+                    if (constraints.maxWidth < 600) {
+                      return const MobileDeviceView();
+                    } else {
+                      return const DesktopDevicesView();
+                    }
+                  },
                 ),
-              ),
+        ),
       ),
     );
   }
