@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -13,7 +14,7 @@ import 'package:window_manager/window_manager.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  if (Platform.isWindows | Platform.isMacOS) {
+  if (Platform.isWindows | Platform.isMacOS | kIsWeb) {
     await windowManager.ensureInitialized();
 
     WindowOptions windowOptions = const WindowOptions(

@@ -47,6 +47,7 @@ class NoteListMenuActionsContent extends StatelessWidget {
               Text(
                 actions[index]['name'],
                 style: TextStyle(
+                  color: Colors.red,
                   fontFamily: FontApp.regularStyle,
                 ),
               ),

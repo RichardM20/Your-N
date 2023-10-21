@@ -30,7 +30,7 @@ class WaitContent extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: FontApp.mediumStyle,
                           fontSize: 18,
-                          color: Theme.of(context).primaryColor,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       );
                     } else {
@@ -39,7 +39,7 @@ class WaitContent extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: FontApp.regularStyle,
                           fontSize: 14,
-                          color: Theme.of(context).primaryColor,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       );
                     }
@@ -49,7 +49,7 @@ class WaitContent extends StatelessWidget {
               const SizedBox(height: 5),
               SvgPicture.asset(
                 'assets/icons/winking-icon.svg',
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.secondary,
                 height: 35,
               ),
             ],

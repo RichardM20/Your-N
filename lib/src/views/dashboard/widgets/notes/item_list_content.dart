@@ -17,7 +17,7 @@ class ItemListNotesContent extends StatelessWidget {
         curve: Curves.easeIn,
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         decoration: BoxDecoration(
-          color: onItemHover.value == index ? Colors.white : Theme.of(context).colorScheme.background,
+          color: onItemHover.value == index ? Theme.of(context).colorScheme.background : Theme.of(context).scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(10),
           boxShadow: onItemHover.value == index
               ? [

@@ -17,7 +17,7 @@ class ThemeApp {
     scaffoldBackgroundColor: const Color(0xFFF2F2FA),
     colorScheme: ColorScheme.fromSwatch().copyWith(
       secondary: const Color(0xFFAC99CA),
-      background: const Color(0xFFF2F2FA),
+      background: const Color.fromARGB(255, 252, 252, 255),
     ),
   );
 
