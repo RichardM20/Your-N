@@ -37,7 +37,7 @@ class _NoteEditionContentState extends State<NoteEditionContent> {
   Widget _content() => Container(
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(
             10,
           ),
@@ -46,6 +46,25 @@ class _NoteEditionContentState extends State<NoteEditionContent> {
           children: [
             QuillToolbar.basic(
               controller: controller,
+              showAlignmentButtons: false,
+              showBackgroundColorButton: false,
+              showCenterAlignment: false,
+              showCodeBlock: false,
+              showIndent: false,
+              showLink: false,
+              showDividers: false,
+              showListCheck: false,
+              showSearchButton: false,
+              showHeaderStyle: false,
+              showSubscript: false,
+              showColorButton: false,
+              showStrikeThrough: false,
+              showUnderLineButton: false,
+              showListNumbers: false,
+              showInlineCode: false,
+              showSuperscript: false,
+              showQuote: false,
+              showDirection: false,
               fontFamilyValues: const {
                 "Poppins": "Poppins-Regular",
                 "Inter": "Inter-Regular",
@@ -55,6 +74,9 @@ class _NoteEditionContentState extends State<NoteEditionContent> {
             ),
             Expanded(
               child: QuillEditor.basic(
+                textSelectionThemeData: TextSelectionThemeData(
+                  cursorColor: Theme.of(context).primaryColor,
+                ),
                 controller: controller,
                 readOnly: false,
               ),

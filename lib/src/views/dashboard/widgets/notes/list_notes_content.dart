@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+
 import 'package:note_app/src/controllers/dashboard_controller.dart';
+import 'package:note_app/src/views/dashboard/widgets/edition/empy_notes_content.dart';
 import 'package:note_app/src/views/dashboard/widgets/edition/notes_edition_content.dart';
 
+import 'item_list_content.dart';
 import 'note_add_button_content.dart';
-import 'note_information_content.dart';
 
 class NoteListDataContent extends StatelessWidget {
   const NoteListDataContent({super.key});
@@ -37,83 +37,72 @@ class NotesListContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: List.generate(
-            _controller.notesModel.length,
-            (index) => InkWell(
-              hoverColor: Colors.transparent,
-              splashColor: Colors.transparent,
-              overlayColor: MaterialStateProperty.resolveWith(
-                (states) => Colors.transparent,
-              ),
-              onTap: () {
-                _controller.editionState.value = 'editing';
-                _controller.setEditNote(_controller.notesModel[index], index);
-                if (Get.width < 600) {
-                  showBottomSheet(
-                    context: context,
-                    builder: (context) => NoteEditionContent(
-                      document: Document.fromJson(
-                        jsonDecode(
-                          _controller.noteEdit.value.content.toString(),
-                        ),
+      child: Get.width < 600 && _controller.notesModel.isEmpty
+          ? const Center(
+              child: EmptyNotesContent(),
+            )
+          : Obx(
+              () {
+                final notesSearch = _controller.notesModel
+                    .where(
+                      (note) => note.title!.toLowerCase().contains(
+                            _controller.filtered.value,
+                          ),
+                    )
+                    .toList();
+                return ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 15),
+                  itemCount: notesSearch.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      hoverColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      overlayColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.transparent,
                       ),
-                      editing: true,
-                    ),
-                  );
-                }
+                      onTap: () {
+                        _ontap(context, notesSearch[index], index);
+                      },
+                      onHover: (isHover) {
+                        if (isHover == true) {
+                          onItemHover.value = index;
+                        } else {
+                          onItemHover.value = -999;
+                        }
+                      },
+                      mouseCursor: SystemMouseCursors.click,
+                      child: ItemListNotesContent(
+                        index: index,
+                        model: notesSearch[index],
+                        onItemHover: onItemHover,
+                      ),
+                    );
+                  },
+                );
               },
-              onHover: (isHover) {
-                if (isHover == true) {
-                  onItemHover.value = index;
-                } else {
-                  onItemHover.value = -999;
-                }
-              },
-              mouseCursor: SystemMouseCursors.click,
-              child: Obx(
-                () => AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeIn,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                  decoration: BoxDecoration(
-                    color: onItemHover.value == index
-                        ? Colors.white
-                        : Theme.of(context).colorScheme.background,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: onItemHover.value == index
-                        ? [
-                            const BoxShadow(
-                              blurRadius: 8,
-                              color: Colors.black12,
-                              offset: Offset(
-                                0.0,
-                                0.5,
-                              ),
-                            )
-                          ]
-                        : [],
-                  ),
-                  width: Get.width,
-                  margin: const EdgeInsets.symmetric(vertical: 4),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      NoteInformationContent(index: index),
-                    ],
-                  ),
-                ),
-              ),
+            ),
+    );
+  }
+
+  void _ontap(context, note, index) {
+    _controller.editionState.value = 'editing';
+    _controller.setEditNote(note, index);
+    if (Get.width < 600) {
+      showModalBottomSheet(
+        context: context,
+        enableDrag: true,
+        useSafeArea: true,
+        isScrollControlled: true,
+        builder: (context) => NoteEditionContent(
+          document: Document.fromJson(
+            jsonDecode(
+              _controller.noteEdit.value.content.toString(),
             ),
           ),
+          editing: true,
         ),
-      ),
-    );
+      );
+    }
   }
 }

@@ -22,8 +22,11 @@ class AddNoteButtonContent extends StatelessWidget {
       color: Theme.of(context).primaryColor,
       onPressed: () {
         if (Get.width < 600) {
-          showBottomSheet(
+          showModalBottomSheet(
             context: context,
+            enableDrag: true,
+            useSafeArea: true,
+            isScrollControlled: true,
             builder: (context) => const NoteEditionContent(
               editing: false,
             ),

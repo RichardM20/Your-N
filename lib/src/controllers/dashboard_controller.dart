@@ -12,6 +12,7 @@ class DashboardController extends GetxController {
   final noteEditIndex = 9999.obs;
   final isLoading = true.obs;
   final _prefs = Preferences();
+  final filtered = ''.obs;
   RxBool isBold = false.obs;
   RxBool isItalic = false.obs;
   final familySelected = 'Inter'.obs;

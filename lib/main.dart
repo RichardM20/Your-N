@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -10,23 +12,25 @@ import 'package:window_manager/window_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await windowManager.ensureInitialized();
 
-  await initializeDateFormatting('en', null);
+  if (Platform.isWindows | Platform.isMacOS) {
+    await windowManager.ensureInitialized();
+
+    WindowOptions windowOptions = const WindowOptions(
+      minimumSize: Size(400, 600),
+      center: true,
+      skipTaskbar: true,
+      title: 'Yor NA',
+    );
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+      await windowManager.focus();
+    });
+  }
+  await initializeDateFormatting('en_US', null);
   final prefs = Preferences();
   await prefs.initPrefs();
   Get.put(DashboardController());
-
-  WindowOptions windowOptions = const WindowOptions(
-    minimumSize: Size(400, 800),
-    center: true,
-    skipTaskbar: true,
-    title: 'Yor NA',
-  );
-  windowManager.waitUntilReadyToShow(windowOptions, () async {
-    await windowManager.show();
-    await windowManager.focus();
-  });
 
   runApp(const MyApp());
 }
@@ -38,7 +42,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       theme: ThemeApp.lightTheme,
       darkTheme: ThemeApp.darkTheme,
       title: 'Your NA',

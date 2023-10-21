@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import 'package:note_app/src/app/utils/font_app.dart';
-import 'package:note_app/src/controllers/dashboard_controller.dart';
+import 'package:note_app/src/models/note_model.dart';
 
 import 'menu_actions_content.dart';
 
 class NoteInformationContent extends StatelessWidget {
-  NoteInformationContent({
+  const NoteInformationContent({
     super.key,
     required this.index,
+    required this.model,
   });
 
   final int index;
-  final _controller = DashboardController.to;
+  final NoteDataModel model;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -24,7 +23,7 @@ class NoteInformationContent extends StatelessWidget {
             TextSpan(
               children: [
                 TextSpan(
-                  text: "${_controller.notesModel[index].title}\n",
+                  text: "${model.title}\n",
                   style: TextStyle(
                     fontFamily: FontApp.mediumStyle,
                     color: Theme.of(context).primaryColor,
@@ -35,10 +34,7 @@ class NoteInformationContent extends StatelessWidget {
                 WidgetSpan(
                     child: SizedBox(
                   child: Text(
-                    _controller.notesModel[index].preview
-                        .toString()
-                        .trim()
-                        .replaceAll("\n", ''),
+                    model.preview.toString().trim().replaceAll("\n", ''),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontFamily: FontApp.regularStyle,
@@ -47,7 +43,7 @@ class NoteInformationContent extends StatelessWidget {
                   ),
                 )),
                 TextSpan(
-                  text: '\n\n${_controller.notesModel[index].date}',
+                  text: '\n\n${model.date}',
                   style: TextStyle(
                     fontFamily: FontApp.regularStyle,
                     color: Theme.of(context).colorScheme.secondary,

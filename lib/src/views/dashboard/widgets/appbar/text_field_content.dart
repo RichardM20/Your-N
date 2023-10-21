@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:note_app/src/app/utils/font_app.dart';
+import 'package:note_app/src/controllers/dashboard_controller.dart';
 
 class TextFormSearchContent extends StatelessWidget {
   const TextFormSearchContent({
@@ -21,6 +23,14 @@ class TextFormSearchContent extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20),
           child: TextFormField(
             textInputAction: TextInputAction.search,
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: FontApp.mediumStyle,
+            ),
+            onChanged: (value) {
+              DashboardController.to.filtered.value = value.toLowerCase();
+              DashboardController.to.notesModel.refresh();
+            },
             cursorColor: Theme.of(context).appBarTheme.backgroundColor,
             decoration: InputDecoration(
               fillColor: Colors.white,
@@ -28,6 +38,7 @@ class TextFormSearchContent extends StatelessWidget {
               enabledBorder: borderStyle,
               errorBorder: borderStyle,
               hintText: 'search'.tr,
+              hintStyle: TextStyle(color: Colors.grey, fontFamily: FontApp.mediumStyle),
               focusedBorder: borderStyle,
               filled: true,
               prefixIcon: Icon(

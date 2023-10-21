@@ -5,10 +5,9 @@ class HoverLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: double.infinity,
-      color: Colors.white.withOpacity(0.8),
       child: Center(
         child: CircularProgressIndicator(
           color: Theme.of(context).primaryColor,

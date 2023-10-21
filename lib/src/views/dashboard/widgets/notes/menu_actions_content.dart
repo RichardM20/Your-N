@@ -11,11 +11,6 @@ class NoteListMenuActionsContent extends StatelessWidget {
   });
   List actions = [
     {
-      'name': 'starred',
-      'icon': Icons.star_border_purple500_outlined,
-      'color': Colors.blueAccent,
-    },
-    {
       'name': 'delete',
       'icon': Icons.delete_outlined,
       'color': Colors.red,
